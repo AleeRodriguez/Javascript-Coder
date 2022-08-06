@@ -1,4 +1,4 @@
-alert("Vamos a probar una calculadora!");
+/*alert("Vamos a probar una calculadora!");
 
 let numero1 = parseInt(prompt("Ingresa un numero"));
 let numero2 = parseInt(
@@ -15,7 +15,7 @@ alert("Muchas gracias, hasta pronto!");
 /*----------------------------------------------------------*/
 
 
-alert("Menu semanal!");
+/*alert("Menu semanal!");
 console.log("Menu Semanal!");
 let dia = prompt("Ingrese el dia para ver el menu");
 
@@ -51,4 +51,4 @@ while (dia != "salir") {
       break;
   }
   dia = prompt("Ingrese salir para terminar, de lo contrario seleccione dia");
-}
+}*/
