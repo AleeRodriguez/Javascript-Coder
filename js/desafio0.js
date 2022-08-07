@@ -13,7 +13,7 @@ for (numero1; numero1 <= 1000000000000000000000000000000; numero1++) {
 alert("Muchas gracias, hasta pronto!");
 
 /*----------------------------------------------------------*/
-
+// Primer Entregable
 
 /*alert("Menu semanal!");
 console.log("Menu Semanal!");
@@ -52,3 +52,10 @@ while (dia != "salir") {
   }
   dia = prompt("Ingrese salir para terminar, de lo contrario seleccione dia");
 }*/
+
+//Segundo Entregable! 
+
+function curso(){
+  curso = prompt("Ingresar que curso es!")
+  console.log("curso")
+}
