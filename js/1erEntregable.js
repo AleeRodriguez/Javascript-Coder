@@ -28,30 +28,26 @@ let dia = semanal.filter(diario => diario.dia == ingreso)
 console.log("Dia a comprar:" +" " + ingreso)
 alert("Dia a comprar:" +" " + ingreso)
 
-/*switch (opcionDia) {
-    case 1:
-    comprar(opcionDia)
-    break;
-    case 2:
-    comprar(opcionDia)
-    break;
-    case 3:
-    comprar(opcionDia)
-    break;
-    case 4:
-    comprar(opcionDia)
-    break;
-    case 5:
-    comprar(opcionDia)
-    break;
-    case 6:
-    comprar(opcionDia)
-    break;
-    case 7:
-    comprar(opcionDia)
-    break;
-    default:
-        break;
+function agregarDiaEspecial(){
+    let diaespecial = prompt("Ingresa que dia deseas agregar")
+    let precioespecial = Number("Ingresa un precio de ese dia")
+    let productoespecial = prompt("Ingresa que deseas comer ese dia")
+    let disponibilidadespecial = confirm("Ingrese si esta disponible")
+    let especialdia = new diario(diaespecial,precioespecial,productoespecial,disponibilidadespecial)
+    semanal.push(especialdia)
+    console.log(semanal)
 }
 
-*/
+let cargarDiaEspecial = prompt("Deseas agregar/o modificar un dia especial?").toLocaleLowerCase()
+
+while(cargarDiaEspecial == "si"){
+    agregarDiaEspecial()
+    cargarDiaEspecial = prompt("Deseas agregar/o modificar un dia especial?").toLocaleLowerCase()
+
+}
+
+alert("Tu compra es: ", " " + ingreso + cargarDiaEspecial)
+alert("Muchas Gracias!! ")
+
+
+
