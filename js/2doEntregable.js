@@ -49,3 +49,12 @@ function removeFromCart(id) {
     renderCart();
 }
 renderProducts();
+
+//localStorage.setItem('products', products)
+let productsEnJson = JSON.stringify(products);
+localStorage.setItem('productsEnJson',productsEnJson);
+let productsRecuperados = localStorage.getItem('productsEnJson');
+productsRecuperados = JSON.parse(productsRecuperados);
+console.log(productsRecuperados);
+
+
