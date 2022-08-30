@@ -5,7 +5,7 @@ const products = [
     {id:3, day:'Jueves',food: 'Milanesa con pure', price: 700, category: 'carne', img: 'https://unareceta.com/wp-content/uploads/2015/06/milanesa-con-pure.jpg'},
     {id:4, day:'Viernes',food: 'Ravioles con salsa ', price: 700, category: 'pastas', img: 'https://okdiario.com/img/2014/07/04/raviolis-de-tomate-a-las-finas-hierbas-655x368.jpg'},
 ];
-let cart = [];
+let cart = [{}];
 
 function renderProducts() {
     let html = '';
@@ -42,10 +42,18 @@ function renderCart() {
 function addToCart(id){
     const foundProduct = products.find((item) => item.id == id);
     cart.push(foundProduct);
+    let cartEnJson = JSON.stringify(cart);
+    localStorage.setItem('cartEnJson', cartEnJson);
+    let carritoRecuperado = localStorage.getItem('cartEnJson');
+    carritoRecuperado = JSON.parse(carritoRecuperado);    
     renderCart();
 }
 function removeFromCart(id) {
     cart.splice(id,1);
+    let cartEnJson = JSON.stringify(cart);
+    localStorage.setItem('cartEnJson', cartEnJson);
+    let carritoRecuperado = localStorage.getItem('cartEnJson');
+    carritoRecuperado = JSON.parse(carritoRecuperado);  
     renderCart();
 }
 renderProducts();
@@ -56,5 +64,3 @@ localStorage.setItem('productsEnJson',productsEnJson);
 let productsRecuperados = localStorage.getItem('productsEnJson');
 productsRecuperados = JSON.parse(productsRecuperados);
 console.log(productsRecuperados);
-
-
