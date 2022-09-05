@@ -23,9 +23,6 @@
                     <a class="nav-link active" aria-current="page" href="./productos.html"style="color: white";>Productos</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./armaTuMenu.html"style="color: white";>Arma tu Menu</a>
-                  </li>
-                  <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="./carrito.html"style="color: green";>Carrito</a>
                   </li>
                 </ul>
@@ -34,7 +31,10 @@
           </nav>
     </header>
     <main>
-      <center><h3 style="background-color: turquoise; border: 2px solid gray;">Menu Semanal!</h3>
+      <button onclick="setCategoryFilter('')">Todos</button>
+      <button onclick="setCategoryFilter('No veggie')">No veggie</button>
+      <button onclick="setCategoryFilter('veggie')">Veggie</button>
+      <center><h3 style="background-color: turquoise; border: 2px solid gray; border-radius:20px ;">Menu Semanal!</h3>
         <div id="div-products" style=" border: 2px solid gray;"></div>Nada</center>
       <center><h3 style="background-color: turquoise; ; border: 2px solid gray; ">Carrito 🛒</h3>
         <div id="div-cart" style=" border: 2px solid gray;"> Por el momento no hay nada</div></center>
