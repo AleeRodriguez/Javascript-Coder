@@ -1,8 +1,8 @@
 /* Operador Ternario*/
-let preguntaInicio = prompt('Hola! queres menu veggie o no veggie?')
-preguntaInicio == 'no veggie' ? alert('Te recomendamos la pestaña No veggie!!') : alert('Te recomendamos la pestaña veggie!')
-
-
+let preguntaInicio = prompt("Hola! queres menu veggie o no veggie?");
+preguntaInicio == "no veggie"
+  ? alert("Te recomendamos la pestaña No veggie!!")
+  : alert("Te recomendamos la pestaña veggie!");
 
 let products = [
   {
@@ -142,6 +142,12 @@ function addToCart(id) {
   localStorage.setItem("cartEnJson", cartEnJson);
   let carritoRecuperado = localStorage.getItem("cartEnJson");
   carritoRecuperado = JSON.parse(carritoRecuperado);
+  Swal.fire({
+    title: "Producto agregado al carro",
+    text: "Queres agregar mas productos?",
+    icon: "success",
+    confirmButtonText: "Vamos!",
+  });
   renderCart();
 }
 function removeFromCart(id) {
@@ -150,11 +156,30 @@ function removeFromCart(id) {
   localStorage.setItem("cartEnJson", cartEnJson);
   let carritoRecuperado = localStorage.getItem("cartEnJson");
   carritoRecuperado = JSON.parse(carritoRecuperado);
+  Swal.fire({
+    title: "Está seguro de eliminar el producto?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, seguro",
+    cancelButtonText: "No, no quiero",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Eliminado del carrito!",
+        icon: "success",
+        text: "El producto fue eliminado de su carrito",
+      });
+    }
+  });
   renderCart();
 }
 renderProducts();
 
 /*Desectructuracion de un array*/
-const veggies = ["berenjena con pure","Wrap de vegetales", "tarta de zanahoria" ];
-const [ frito , horno , alHorno ] = veggies;
+const veggies = [
+  "berenjena con pure",
+  "Wrap de vegetales",
+  "tarta de zanahoria",
+];
+const [frito, horno, alHorno] = veggies;
 console.log(frito);
