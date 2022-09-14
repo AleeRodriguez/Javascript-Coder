@@ -1,9 +1,3 @@
-/* Operador Ternario*/
-let preguntaInicio = prompt("Hola! queres menu veggie o no veggie?");
-preguntaInicio == "no veggie"
-  ? alert("Te recomendamos la pestaña No veggie!!")
-  : alert("Te recomendamos la pestaña veggie!");
-
 let products = [
   {
     id: 0,
@@ -88,7 +82,7 @@ let products = [
 ];
 /*Spread de array*/
 const copyProducts = [...products];
-let cart = [{}];
+let cart = [];
 let categoryFilter = "";
 
 function setCategoryFilter(category) {
@@ -110,12 +104,14 @@ function renderProducts() {
     <p>Comida: ${products[i].food}</p>
     <p>Precio:${products[i].price}</p>
     <p>Categoria:${products[i].category}</p>
-    <p><img style="width: 150px; height: 150px" src="${products[i].img}"></p>
-    <button onclick="addToCart(${products[i].id});">Seleccionar 🛒</button>
+    <p><img style="width: 150px; height: 150px;" src="${products[i].img}"></p>
+    <button style= "border-radius:20px; background-color: green;" onclick="addToCart(${products[i].id});">Seleccionar 🛒</button>
     </div>`;
   }
   document.getElementById("div-products").innerHTML = html;
 }
+renderCart();
+
 function renderCart() {
   let html = "";
   for (let i = 0; i < cart.length; i++) {
@@ -123,25 +119,29 @@ function renderCart() {
       html +
       `
     <div style=" border-radius: 20px; border: 2px solid turquoise;display: inline-block; background-color: turquoise; margin: 5px">
-    <p style="font-weight: bold">id:${cart[i].id}</p>
+    <p style="visibility:hidden">id:${cart[i].id}</p>
     <p style="background-color: white">${cart[i].day}</p>
     <p>Comida: ${cart[i].food}</p>
     <p>Precio:${cart[i].price}</p>
     <p>Categoria:${cart[i].category}</p>
     <p><img style="width: 150px; height: 150px" src="${cart[i].img}"></p>
     <span  ></span>
-    <button style= "cursor:pointer;" onclick="removeFromCart(${cart[i].id});" >Eliminar 🗑️</button>
+    <button style="border-radius:20px; background-color: green;"cursor:pointer;" onclick="removeFromCart(${cart[i].id});" >Eliminar 🗑️</button>
     </div>`;
   }
   document.getElementById("div-cart").innerHTML = html;
 }
+renderCart();
+let saveToLocalStorage = () =>{
+  let storageJSON = JSON.stringify(cart);
+  localStorage.setItem("cartEnJson", cartEnJson);
+}
+
 function addToCart(id) {
   const foundProduct = products.find((item) => item.id == id);
   cart.push(foundProduct);
   let cartEnJson = JSON.stringify(cart);
   localStorage.setItem("cartEnJson", cartEnJson);
-  let carritoRecuperado = localStorage.getItem("cartEnJson");
-  carritoRecuperado = JSON.parse(carritoRecuperado);
   Swal.fire({
     title: "Producto agregado al carro",
     text: "Queres agregar mas productos?",
@@ -149,13 +149,11 @@ function addToCart(id) {
     confirmButtonText: "Vamos!",
   });
   renderCart();
+  saveToLocalStorage();
+  console.log(cart);
 }
+
 function removeFromCart(id) {
-  cart.splice(id, 1);
-  let cartEnJson = JSON.stringify(cart);
-  localStorage.setItem("cartEnJson", cartEnJson);
-  let carritoRecuperado = localStorage.getItem("cartEnJson");
-  carritoRecuperado = JSON.parse(carritoRecuperado);
   Swal.fire({
     title: "Está seguro de eliminar el producto?",
     icon: "warning",
@@ -164,6 +162,14 @@ function removeFromCart(id) {
     cancelButtonText: "No, no quiero",
   }).then((result) => {
     if (result.isConfirmed) {
+      const foundProduct = cart.find((item) => item.id == id);
+      const index = cart.indexOf(foundProduct);
+      cart.splice(index, 1);
+      renderCart();
+
+      let cartEnJson = JSON.stringify(cart);
+      localStorage.setItem("cartEnJson", cartEnJson);
+      renderCart();
       Swal.fire({
         title: "Eliminado del carrito!",
         icon: "success",
@@ -171,9 +177,9 @@ function removeFromCart(id) {
       });
     }
   });
-  renderCart();
 }
 renderProducts();
+saveToLocalStorage();
 
 /*Desectructuracion de un array*/
 const veggies = [
