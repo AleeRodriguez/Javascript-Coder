@@ -1,4 +1,6 @@
 let carrito = JSON.parse(localStorage.getItem("productsenJson")) || [];
+let total = localStorage.getItem(`total`);
+total = parseInt(total);
 
 let renderCart = () => {
   let html = ``;
@@ -16,13 +18,7 @@ let renderCart = () => {
   }
   document.getElementById("div-cart").innerHTML = html;
 };
-renderCart();
-
-
-let saveToLocalStorage = () => {
-  let storageJSON = JSON.stringify(carrito);
-  localStorage.setItem("productsEnJson", storageJSON);
-};
+renderCart()
 
 function renderProductsApi() {
   fetch("../datalocal.json")
@@ -49,7 +45,10 @@ function renderProductsApi() {
 }
 renderProductsApi();
 renderCart();
-
+let saveToLocalStorage = () => {
+  let storageJSON = JSON.stringify(carrito);
+  localStorage.setItem("productsEnJson", storageJSON);
+};
 
 let addToCart = (id) => {
   fetch("../datalocal.json")
@@ -69,7 +68,7 @@ let addToCart = (id) => {
     .catch((e) => {
       console.log(e);
     });
-}
+};
 renderCart();
 
 function removeFromCart(id) {
@@ -93,4 +92,16 @@ function removeFromCart(id) {
       });
     }
   });
+}
+
+ let setCategoryFilter = (category)=> {
+  fetch("../datalocal.json")
+    .then((res) => res.json())
+    .then((products) => {
+      if (category == "No veggie" || category == "veggie") {
+        products = products.filter((item) => item.category == category);
+      }
+    });
+  renderCart();
+  saveToLocalStorage();
 }
